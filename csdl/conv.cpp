@@ -1,19 +1,17 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
+#include <algorithm>
 
-std::string conv(std::string S);
-int Priority(char c);
-double calc(char A[]);
-bool check(char A[]);
 template<typename T>
 class Stack
 {
     public:
-    Stack (int Capacity = 100)
+    Stack(int capacity = 100)
     {
-        theArray = new T[Capacity];
-        TopOfStack = NULL;
+        theArray = new T[capacity];
+        // TopOfStack = 0 se gay ra warning*
+        TopOfStack = 0;
     }
 
     ~Stack()
@@ -58,15 +56,15 @@ class Stack
 
     bool check(T x) 
     {
-        for (int i = TopOfStack; i >= 0; i--)
-        {
-            if (x == theArray[i])
-            {
+        for (int i = TopOfStack; i >= 0; i--) {
+            if (x == theArray[i]) {
                 std::cout << "1" << std::endl;
                 return true;
             }
         }
+
         std::cout << "0" << std::endl;
+
         return false;
     }
 
@@ -86,7 +84,18 @@ class Stack
     int TopOfStack;    
 };    
 
-int Priority(char pnx) // Ham tra ve gia tri uu tien cua toan tu
+// Ham kiem tra ky tu trong mang bt[] co phai 1 toan tu hay khong.
+bool check(char bt[]) 
+{
+     return strcmp(bt, "+") == 0 ||
+            strcmp(bt, "-") == 0 || 
+            strcmp(bt, "*") == 0 || 
+            strcmp(bt, "/") == 0 || 
+            strcmp(bt, "^") == 0;
+}
+
+// Kiem tra do uu tien cua toan tu.
+int Priority(char pnx)
 {
      if (pnx == '(') {
           return 0;
@@ -102,21 +111,27 @@ int Priority(char pnx) // Ham tra ve gia tri uu tien cua toan tu
      }
 }
 
-std::string conv(std::string S) // Ham chuyen tu bieu thuc trung to sang hau to
+/* Chuyen bieu thuc tu trung to sang hau to. */
+std::string conv(std::string str, bool check)
 {
      Stack<char> sdm;
+
+     if (check == true) {
+          std::replace(str.begin(), str.end(), ',', '.');
+     }
+
      std::string q = "";
      int i = 0;
-     while (i < S.length())
+     while (i < str.length())
      {
-          char c = S.at(i);
-          if ('0' <= c && c <= '9' || c == '.') {
-               q += c;
-          } else if (c != ' ') {
-               if (c == '(') {
+          char n = str.at(i);
+          if ('0' <= n && n <= '9' || n == '.' || n == ',') {
+               q += n;
+          } else if (n != ' ') {
+               if (n == '(') {
                     sdm.push('(');
                } else {
-                    if (c == ')') {
+                    if (n == ')') {
                          if (sdm.top() == '(') {
                               sdm.pop();
                          } else {
@@ -129,12 +144,13 @@ std::string conv(std::string S) // Ham chuyen tu bieu thuc trung to sang hau to
                               }     
                          }
                     } else {
-                         while (!sdm.empty() && Priority(c) <= Priority(sdm.top())) {
+                         while (!sdm.empty() && Priority(n) <= Priority(sdm.top())) 
+                         {
                               q += ' ';
                               q += sdm.top();
                               sdm.pop();
                          }
-                         sdm.push(c);
+                         sdm.push(n);
                     }
                }
                q += ' ';
@@ -183,29 +199,28 @@ double calc(char bt[])
      return msm.top();
 }
 
-// Ham kiem tra ky tu p co phai 1 toan tu hay khong
-bool check(char bt[]) 
-{
-     return strcmp(bt, "+") == 0 ||
-            strcmp(bt, "-") == 0 || 
-            strcmp(bt, "*") == 0 || 
-            strcmp(bt, "/") == 0 || 
-            strcmp(bt, "^") == 0;
-}
-
 int main()
 {
      // Lam sach VS terminal truoc khi chay.
      system("clear");
      char z[300];
      std::string inp;
-     std::cout << "Nhap bieu thuc (dang trung to): ";
+     std::cout << "Infix: ";
      getline(std::cin, inp);
-     std::string v = conv(inp);
+     std::string v = conv(inp, true);
+
+     std::string p = conv(inp, false);
+     p.resize(p.size() - 1);
+
      std::cout << std::endl;
-     std::cout << "Post-fix conversion: " << v << std::endl;
+     std::cout << "Post-fix conversion: " << p << std::endl;
      for (int i = 0; i < v.length(); i++)
      {
+          if (z[i] == ',')
+          {
+               z[i] = '.';
+          }
+
           z[i] = v[i];
      }
      std::cout << std::endl;
