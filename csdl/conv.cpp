@@ -101,7 +101,7 @@ int Priority(char pnx)
           return 0;
      } else if (pnx == '+' || pnx == '-') {
           return 1;
-     } else if (pnx == '*' || pnx == '/') {
+     } else if (pnx == '*' || pnx == '/' || pnx == 'x') {
           return 2;
      } else if (pnx == '^') {
           return 3;
@@ -118,6 +118,7 @@ std::string conv(std::string str, bool check)
 
      if (check == true) {
           std::replace(str.begin(), str.end(), ',', '.');
+          std::replace(str.begin(), str.end(), 'x', '*');
      }
 
      std::string q = "";
