@@ -1,6 +1,6 @@
 #include<iostream>
-#include<string.h>
-#include<math.h>
+#include<cstring>
+#include<cmath>
 #include<iomanip>
 #include<algorithm>
 
@@ -87,16 +87,25 @@ class Stack
 
 // Ham kiem tra so duoc nhap vao co phai
 // la so thap phan hay khong.
-bool IsInt(double d)
+// Time complexity: O(1)
+int IsInt(double d)
 {
-     return d == (int) d;
+     if (d == (int)d) {
+          return 1;
+     } else if (std::isinf(d) == true) {
+          return 2;
+     }
+     return 3;
 }
 
 // Ham chuyen so nguyen/so thap phan thanh xau ky tu
+// Time complexity: O(1)
 std::string fconv(double a)
 {
-     if (IsInt(a) == true) {
+     if (IsInt(a) == 1) {
           std::cout << "Ket qua: " << a << std::endl;
+     } else if (IsInt(a) == 2) {
+          std::cout << "Bieu thuc khong xac dinh" << std::endl;
      } else {
           // Setup conversion
           std::ostringstream stream1;
@@ -144,11 +153,12 @@ std::string fconv(double a)
           } while (locale < 1 || locale > 3);
      }
 
-     // Placebo de khu warning
+     // Placebo de khu warning9
      return "1";
 }
 
 // Ham kiem tra ky tu trong mang bt[] co phai 1 toan tu hay khong.
+// Time complexity: O(1)
 bool check(char bt[]) 
 {
      return strcmp(bt, "+") == 0 ||
@@ -159,23 +169,24 @@ bool check(char bt[])
 }
 
 // Kiem tra do uu tien cua toan tu.
+// Time complexity: O(1)
 int Priority(char pnx)
 {
      if (pnx == '(') {
           return 0;
      } else if (pnx == '+' || pnx == '-') {
           return 1;
-     } else if (pnx == '*' || pnx == '/' || pnx == 'x') {
+     } else if (pnx == '*' || pnx == '/' || pnx == 'x' ||
+                pnx == '%' || pnx == '^') {
           return 2;
-     } else if (pnx == '^') {
-          return 3;
      // Trong truong hop khong thoa man dieu kien nao, tra ve -1.
      } else {
           return -1;
      }
 }
 
-/* Chuyen bieu thuc tu trung to sang hau to. */
+// Chuyen bieu thuc tu trung to sang hau to.
+// Space complexity: O(n)
 std::string conv(std::string str, bool replace)
 {
      Stack<char> sdm;
@@ -194,25 +205,33 @@ std::string conv(std::string str, bool replace)
           if ('0' <= n && n <= '9' || n == '.' || n == ',') {
                q += n;
           } else if (n != ' ') {
+               // Khi tim thay '(', bo vao stack.
                if (n == '(') {
                     sdm.push('(');
                } else {
+                    // Khi tim thay ')', loi het tat ca cac dau trong stack
+                    // (tu dau stack den dau '(' cuoi cung duoc nhin thay).
                     if (n == ')') {
                          if (sdm.top() == '(') {
                               sdm.pop();
                          } else {
+                              // Neu khong phai la '(', loi het cac dau con lai
+                              // trong stack ra, theo 1 thu tu.
                               while (sdm.top() != '(') {
                                    q += ' ';
                                    q += sdm.top();
                                    sdm.pop();
+                              // Pop not ( ra khoi stack (neu co)
                               } if (sdm.top() == '(') {
                                    sdm.pop();
-                              }     
+                              }
                          }
                     } else {
-                         while (!sdm.empty() && Priority(n) <= Priority(sdm.top())) 
+                         // Ham so sanh do uu tien cua toan tu
+                         while (!sdm.empty() && Priority(n) 
+                                 < Priority(sdm.top())) 
                          {
-                              q += ' ';
+                              //q += ' ';
                               q += sdm.top();
                               sdm.pop();
                          }
@@ -224,6 +243,8 @@ std::string conv(std::string str, bool replace)
           i++;
      }
 
+     // Day cac thu con lai trong stack
+     // vao q.
      while (!sdm.empty()) {
           q += ' ';
           q += sdm.top();
@@ -232,37 +253,39 @@ std::string conv(std::string str, bool replace)
      return q;
 }
 
+// Ham tinh toan bieu thuc
+// Time complexity: O(1)
 double calc(char bt[]) 
 {
      Stack<double> msm;
-     char *q = strtok(bt, " ");
-     while (q != NULL)
+     char *c = strtok(bt, " ");
+     while (c != NULL)
      {
-          double c;
-          if (check(q) == true)
+          double q;
+          if (check(c) == true)
           {
-               double a = msm.top();
+               double q1 = msm.top();
                msm.pop();
-               double b = msm.top();
+               double q2 = msm.top();
                msm.pop();
                
-               if (strcmp(q, "+") == 0) {
-                    c = b + a;
-               } else if (strcmp(q, "-") == 0) {
-                    c = b - a;
-               } else if (strcmp(q, "*") == 0) {
-                    c = b * a;
-               } else if (strcmp(q, "/") == 0) {
-                    c = b / a;
-               } else if (strcmp(q, "^") == 0) {
-                    c = pow(b, a);
+               if (strcmp(c, "+") == 0) {
+                    q = q2 + q1;
+               } else if (strcmp(c, "-") == 0) {
+                    q = q2 - q1;
+               } else if (strcmp(c, "*") == 0) {
+                    q = q2 * q1;
+               } else if (strcmp(c, "/") == 0) {
+                    q = q2 / q1;
+               } else if (strcmp(c, "^") == 0) {
+                    q = pow(q2, q1);
                }
                
-               msm.push(c);
+               msm.push(q);
           } else {
-               msm.push(atof(q));
+               msm.push(std::stod(c));
           }
-          q = strtok(NULL, " ");
+          c = strtok(NULL, " ");
      }
      return msm.top();
 }
@@ -271,17 +294,29 @@ int main()
 {
      // Lam sach cua so terminal truoc khi chay.
      system("clear");
-     char z[300];
      std::string inp;
+
+     /* Workaround cho so am */
+     std::cout << "De tru so am hay add 0 - truoc gia tri am." << std::endl;
+     std::cout << "Example 4 - (-3): 4 - (0 - 3)" << std::endl;
+
      std::cout << "Nhap bieu thuc trung to: ";
      getline(std::cin, inp);
      std::string v = conv(inp, true);
 
+     // Do bi thua 1 phan tu trong string (doan cuoi string),
+     // dieu chinh lai kich thuoc xau truoc khi bo vao p.
      std::string p = conv(inp, false);
      p.resize(p.size() - 1);
 
      std::cout << std::endl;
      std::cout << "Bieu thuc hau to: " << p << std::endl;
+
+     char z[inp.size()];
+
+     // Chuyen ki tu tu mang v (mang da duoc chuyen doi,
+     // da duoc chinh sua cac loi ki tu) va pass vao vong
+     // lap for.
      for (int i = 0; i < v.length(); i++)
      {
           if (z[i] == ',')
@@ -292,6 +327,8 @@ int main()
           z[i] = v[i];
      }
      std::cout << std::endl;
+
+     // Goi ham fconv de xu ly bieu thuc.
      fconv(calc(z));
      return 0;
 }

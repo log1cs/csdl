@@ -90,6 +90,7 @@ public:
 		}
 	return;
 	}
+
 	// Kiem tra xem danh sach co chua x hay khong.
 	bool contains(T x)
 	{
@@ -104,6 +105,7 @@ public:
 		}
 		return false;
 	}
+	
 private:
 	struct Node {
     		T elem;      // Phần tử
