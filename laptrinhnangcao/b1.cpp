@@ -28,7 +28,7 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        std::cout << "So thu " << i << ": ";
+        std::cout << "So thu " << i + 1 << ": ";
         std::cin >> a[i];
     }
 
