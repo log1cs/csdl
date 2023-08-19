@@ -7,8 +7,10 @@ std::string chuanhoa(std::string a)
 
     for (int i = 1; i < a.size(); i++)
     {
-        a[i] = std::tolower(a[i]);
+        a[i] = std::tolower(a[i]); 
     }
+
+    std::cout << a << std::endl;
 
     for (int i = 1; i < a.size(); i++)
     {
@@ -17,6 +19,8 @@ std::string chuanhoa(std::string a)
             a[i] = std::toupper(a[i]);
         }
     }
+
+    std::cout << a << std::endl;
 
     while (a[0] == ' ') 
     {
