@@ -43,7 +43,6 @@ int main()
         cout << endl;
     }
     
-
     cout << endl;
     cout << "Co " << dem << " so chinh phuong." << endl;
     return 0;
