@@ -41,15 +41,15 @@ int uocchung(int a, int b)
 void calc(phanso a, phanso b)
 {
     int mauchung = a.mau * b.mau;
-    int tuso = (a.tu * b.mau) + (b.tu * a.mau);
+    int tuso = (a.tu * b.mau) - (b.tu * a.mau);
 
     if (tuso == 0) {
-        std::cout << "Tong a + b = 0/1" << std::endl;
+        std::cout << "Hieu a - b = 0/1" << std::endl;
     } else {
         int ucln = uocchung(abs(tuso), abs(mauchung));
         tuso /= ucln;
         mauchung /= ucln;
-        std::cout << "Tong a + b = " << tuso << "/" << mauchung;
+        std::cout << "Hieu a - b = " << tuso << "/" << mauchung;
     }
 }
 
