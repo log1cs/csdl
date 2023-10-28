@@ -1,0 +1,4 @@
+	ORG 0000H
+	MOV P1, #0C0H
+	MOV P2, P1
+	END

@@ -1,0 +1,5 @@
+	MOV R3, #400
+LOOP:   MOV R2, #250
+	DJNZ R2, $
+	DJNZ R3, LOOP
+	RET
