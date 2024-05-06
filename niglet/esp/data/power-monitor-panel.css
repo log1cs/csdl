@@ -1,0 +1,97 @@
+.account-options1,
+.automation-devices1 {
+  position: relative;
+  cursor: pointer;
+}
+.power-monitor-panel3 {
+  align-self: stretch;
+  position: relative;
+}
+.manage-connections1 {
+  position: relative;
+  cursor: pointer;
+}
+.automation-devices-parent {
+  width: 281px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-39xl);
+}
+.log-out-from1 {
+  align-self: stretch;
+  position: relative;
+  cursor: pointer;
+}
+.espportal3 {
+  flex: 1;
+  position: relative;
+}
+.espportal-wrapper {
+  width: 291px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-10xs);
+  box-sizing: border-box;
+  font-size: var(--font-size-41xl);
+}
+.log-out-from-this-session-parent,
+.power-monitor-panel2 {
+  width: 308px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-18xl);
+}
+.power-monitor-panel2 {
+  width: 100%;
+  height: 838px;
+  position: relative;
+  background-color: var(--color-black);
+  padding: var(--padding-57xl) var(--padding-70xl) var(--padding-33xl);
+  box-sizing: border-box;
+  gap: var(--gap-242xl);
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: var(--font-size-7xl);
+  color: var(--color-white);
+  font-family: var(--font-google-sans);
+}
+@media screen and (max-width: 750px) {
+  .espportal3 {
+    font-size: var(--font-size-29xl);
+  }
+}
+@media screen and (max-width: 675px) {
+  .power-monitor-panel2 {
+    gap: var(--gap-111xl);
+    padding-left: var(--padding-25xl);
+    padding-right: var(--padding-25xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .account-options1,
+  .automation-devices1,
+  .manage-connections1,
+  .power-monitor-panel3 {
+    font-size: var(--font-size-2xl);
+  }
+  .automation-devices-parent {
+    gap: var(--gap-10xl);
+  }
+  .log-out-from1 {
+    font-size: var(--font-size-2xl);
+  }
+  .espportal3 {
+    font-size: var(--font-size-17xl);
+  }
+  .log-out-from-this-session-parent {
+    gap: var(--gap-lg);
+  }
+}

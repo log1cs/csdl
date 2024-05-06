@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nitti:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Google Sans:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="login">
+      <header class="login-child"></header>
+      <div class="release-130a128-eng-wrapper">
+        <div class="release-130a128-eng">Release 13.0.A.1.28-eng</div>
+      </div>
+      <section class="frame-parent">
+        <div class="frame-group">
+          <div class="e-s-p-portal-wrapper">
+            <div class="e-s-p-portal">
+              <h1 class="espportal">
+                <p class="espportal1">ESPPortal</p>
+              </h1>
+              <div class="please-login-with">
+                Please login with the given credentials.
+              </div>
+            </div>
+          </div>
+          <div class="frame-container">
+            <div class="frame-div">
+              <div class="password-input-parent">
+                <img
+                  class="password-input-icon"
+                  alt=""
+                  src="./public/input-field@2x.png"
+                />
+
+                <input class="username" placeholder="Username" type="text" />
+              </div>
+              <div class="error-message"></div>
+            </div>
+            <div class="login-button-parent">
+              <div class="login-button">
+                <img
+                  class="mobile-warning-icon"
+                  alt=""
+                  src="./public/1213983-1@2x.png"
+                />
+
+                <input class="password" placeholder="Password" type="text" />
+              </div>
+              <div class="frame-child"></div>
+            </div>
+          </div>
+        </div>
+        <div class="not-mobile-view">
+          <div class="mobile-warning-label">
+            <div class="c-2024-lycorisoss-container">
+              <p class="c-2024-lycorisoss">
+                (c) 2024 LycorisOSS. Not designed for mobile view, or any screen
+                with less than 1366x768 resolution.
+              </p>
+              <p class="blank-line">&nbsp;</p>
+              <p class="developer-early-preview">
+                DEVELOPER EARLY PREVIEW BUILD. DO NOT LEAK.
+              </p>
+            </div>
+          </div>
+          <button class="login1" id="login">
+            <img class="login-item" alt="" src="./public/rectangle-2.svg" />
+
+            <b class="login2">Login</b>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      var login = document.getElementById("login");
+      if (login) {
+        login.addEventListener("click", function (e) {
+          window.location.href = "./user-interface.html";
+        });
+      }
+      </script>
+  </body>
+</html>

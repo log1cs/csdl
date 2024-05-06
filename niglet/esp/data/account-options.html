@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./account-options.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nitti:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Google Sans:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="account-options2">
+      <div class="automation-devices-group">
+        <div class="automation-devices2" id="automationDevicesText">
+          Automation Devices
+        </div>
+        <b class="account-options3">Account Options</b>
+        <div class="power-monitor-panel4" id="powerMonitorPanel">
+          Power Monitor Panel
+        </div>
+        <div class="manage-connections2" id="manageConnectionsText">
+          Manage Connections
+        </div>
+      </div>
+      <div class="logout-button">
+        <div class="log-out-from2" id="logOutFrom">
+          Log out from this session
+        </div>
+        <div class="espportal-container">
+          <b class="espportal4">ESPPortal</b>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var automationDevicesText = document.getElementById("automationDevicesText");
+      if (automationDevicesText) {
+        automationDevicesText.addEventListener("click", function (e) {
+          window.location.href = "./automation-devices.html";
+        });
+      }
+      
+      var powerMonitorPanel = document.getElementById("powerMonitorPanel");
+      if (powerMonitorPanel) {
+        powerMonitorPanel.addEventListener("click", function (e) {
+          window.location.href = "./power-monitor-panel.html";
+        });
+      }
+      
+      var manageConnectionsText = document.getElementById("manageConnectionsText");
+      if (manageConnectionsText) {
+        manageConnectionsText.addEventListener("click", function (e) {
+          window.location.href = "./manage-connections.html";
+        });
+      }
+      
+      var logOutFrom = document.getElementById("logOutFrom");
+      if (logOutFrom) {
+        logOutFrom.addEventListener("click", function (e) {
+          window.location.href = "./login.html";
+        });
+      }
+      </script>
+  </body>
+</html>
