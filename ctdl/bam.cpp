@@ -142,13 +142,11 @@ int main()
     MucTu mt1("computer", "may tinh");
     MucTu mt2("memory", "bo nho");
     MucTu mt3("hard disk", "dia cung");
-    MucTu mt4("Duc Anh", "Ngu");
 	
     // Chen cac muc tu vao tu dien
     td.chenMucTu(mt1);
     td.chenMucTu(mt2);
     td.chenMucTu(mt3);
-    td.chenMucTu(mt4);
 
     string tuTA, nghiaTV;
 

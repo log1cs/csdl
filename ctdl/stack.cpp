@@ -1,116 +1,109 @@
 #include<iostream>
 
-//using namespace std;
+using namespace std;
 
 template<typename T>
 class Stack
 {
     public:
-    Stack (int Capacity = 100)
-    {
-        theArray = new T[Capacity];
-        TopOfStack = -1;
-    }
-
-    ~Stack()
-    {
-        delete[] theArray;
-    }
-
-    int getSize()
-    {
-        return TopOfStack + 1;
-    }
-
-    bool empty()
-    {
-        return (TopOfStack == -1);
-    }
-
-    void push(T e)
-    {
-        TopOfStack++;
-        theArray[TopOfStack] = e;
-    }
-
-    void pop()
-    {
-        TopOfStack--;
-    }
-
-    T top()
-    {
-        return theArray[TopOfStack];
-    }
-
-    void print() 
-    {
-        for (int i = TopOfStack; i >= 0; i--) 
-        {
-            std::cout << theArray[i] << " ";
+        Stack (int Capacity = 100) {
+            theArray = new T[Capacity];
+            TopOfStack = -1;
         }
-        std::cout << std::endl;        
-    }
 
-    bool check(T x) 
-    {
-        for (int i = TopOfStack; i >= 0; i--)
-        {
-            if (x == theArray[i])
-            {
-                std::cout << "1" << std::endl;
-                return true;
+        ~Stack() {
+            delete[] theArray;
+        }
+
+        int getSize() {
+            return TopOfStack + 1;
+        }
+
+        bool empty() {
+            return (TopOfStack == -1);
+        }
+
+        void push(T e) {
+            TopOfStack++;
+            theArray[TopOfStack] = e;
+        }
+
+        void pop() {
+            TopOfStack--;
+        }
+
+        T top() {
+            return theArray[TopOfStack];
+        }
+
+        // In cac phan tu cua ngan xep len man hinh.
+        void print() {
+            for (int i = TopOfStack; i >= 0; i--) {
+                cout << theArray[i] << " ";
             }
+            cout << endl;        
         }
-        std::cout << "0" << std::endl;
-        return false;
-    }
+
+        bool check(T x) {
+            for (int i = TopOfStack; i >= 0; i--) {
+                if (x == theArray[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
     private:
-    T *theArray;
-    int TopOfStack;
+        T *theArray;
+        int TopOfStack;
 };
 
 int main()
 {	
+    int cnt = 0;
 	Stack<char> s;
 	
-	if (s.empty()) 
-    {
-		std::cout << "Stack empty!" << std::endl;
+    // Kiem tra ngan xep co dang rong hay khong.
+	if (s.empty()) {
+		cout << "Ngan xep dang rong." << endl;
+    } else {
+        cout << "Ngan xep dang khong rong." << endl;
     }
 
+    // Chen 1 so phan tu vao stack.
 	s.push('B'); 
 	s.push('E');
 	s.push('K');
 	s.push('A');
 	s.push('C');
-	
-	std::cout << "Stack size after inserting:  " << s.getSize() << std::endl; // Se in ra 5
-	
-    s.check('K');
-    s.check('O');
 
-	std::cout << "Stack: ";
-    s.print();
+    // In tat ca cac phan tu trong ngan xep len man hinh
+	cout << "Cac phan tu trong ngan xep: ";
+    s.print();    
 
-	std::cout << "Size: " << s.getSize() << std::endl; // Se in ra 0
-	
-    // c) extra questions
+    // Kiem tra x co ton tai trong ngan xep hay khong
     char x;
-    std::cout << "Enter X: ";
-    std::cin >> x;
-    
-    while (!s.empty())
-    {
-        if (s.top() == x)
-        {
-            std::cout << x << " exist!" << std::endl;
-            return 0;
-        }
-        s.pop();            
+    cout << "Nhap x: ";
+    cin >> x;
+
+    if (s.check(x)) {
+        cout << x << " ton tai trong ngan xep!" << endl;
+    } else {
+        cout << x << " khong ton tai trong ngan xep!" << endl;
     }
-    std::cout << x << " doesn't exist!" << std::endl;
-    
+
+    // Rut tung phan tu ra khoi ngan xep cho den khi ngan xep rong
+    // va kiem tra xem ngan xep da rong hay chua.
+	cout << "Tong so phan tu trong stack hien tai: " << s.getSize() << endl;
+
+    while (!s.empty()) {
+        cout << "Ngan xep chua rong. Dang loai bo phan tu " << cnt + 1 << "." << endl;
+        s.pop();
+        cnt++;   
+    }
+    cout << "Ngan xep da rong." << endl;
+
+
+
     return 0;
 }

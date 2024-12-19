@@ -5,14 +5,12 @@ template <typename T>
 class Queue
 {
 public:
-	Queue()
-    {
+	Queue() {
         front = NULL;
         back = NULL;
     }
 	
-	~Queue()
-    {
+	~Queue() {
         while (!empty())
         {
             front = front->next;
@@ -20,14 +18,12 @@ public:
     }
 		
 	// Kiem tra hang doi co dang rong hay khong.
-	bool empty()
-    {
+	bool empty() {
         return (front == NULL);
     }
 		
 	// Lay kich thuoc (so phan tu hien co) cua hang doi.
-	int getSize()
-    {
+	int getSize() {
         Node *p = front;
         int i = 0;
         while (p != NULL)
@@ -39,8 +35,7 @@ public:
     }
 		
 	// Them phan tu e vao cuoi hang doi.
-	void enqueue(T e)
-    {
+	void enqueue(T e) {
         Node * p = new Node (e, NULL);
         if (empty())
         {
@@ -52,8 +47,7 @@ public:
     }
 		
 	// Xoa phan tu o dau hang doi.
-	T dequeue()
-    {
+	T dequeue() {
         Node *old = front;
         int i = front->elem;
         front = front->next;
@@ -62,9 +56,8 @@ public:
         return i;
     }
 		
-    // b)
-    void print()
-    {
+    // In cac phan tu ra man hinh
+    void print() {
         Node * p = front;
         while (p != NULL)
         {
@@ -74,20 +67,15 @@ public:
         cout << endl;
     }
 
-    // c)
-    bool contains(T x)
-    {
+    // Kiem tra cac phan tu co trong hang doi hay khong.
+    bool contains(T x) {
        Node *p = front;
-        while (p != NULL)
-        {
-            if (x == p->elem)
-            {
-                std::cout << "1" << std::endl;
+        while (p != NULL) {
+            if (x == p->elem) {
                 return true;
             }
             p = p->next;
         }
-        std::cout << "0" << std::endl;
         return false;
     }
 
@@ -114,19 +102,46 @@ private:
 int main()
 {
 	Queue<int> q;
+    int check, cnt = 0;
+
+    // Kiem tra hang doi co dang rong hay khong
+	if (q.empty()) {
+		cout << "Hang doi dang rong." << endl;
+    } else {
+        cout << "Hang doi dang khong rong." << endl;
+    }
+
+    // Chen vao hang doi mot so phan tu
 	q.enqueue(3);
 	q.enqueue(6);
 	q.enqueue(1);
 	q.enqueue(2);
-	
-	std::cout << "Size after inserting: " << q.getSize() << std::endl; // Se in ra 4
-	
-    q.contains(6);
+    q.enqueue(5);
+    q.enqueue(9);
 
-	std::cout << "Queue: ";
+    // In tat ca cac phan tu trong hang doi len man hinh
+	std::cout << "Hang doi: ";
     q.print();
-    	
-	std::cout << "Size after calling dequeue(): " << q.getSize() << std::endl; // Se in ra 0
-		
-	return 0;
+
+    // Nhap vao x roi kiem tra x co trong hang doi hay khong
+    cout << "Kiem tra phan tu co ton tai trong hang doi. Nhap x: ";
+    cin >> check;
+
+    if (q.contains(check)) {
+        cout << "Phan tu " << check << " co ton tai trong hang doi." << endl; 
+    } else {
+        cout << "Phan tu " << check << " khong ton tai trong hang doi." << endl; 
+    }
+    
+    // Rut tung phan tu ra khoi hang doi cho den khi hang doi rong
+    // va kiem tra xem hang doi da rong hay chua
+    cout << "So luong phan tu truoc khi dequeue() lan luot la: " << q.getSize() << endl;
+    while (!q.empty()) {
+        cout << "Dang dequeue() phan tu thu " << cnt + 1 << "." << endl;
+        q.dequeue();
+        cnt++;
+    }
+    cout << "Hang doi dang rong." << endl;
+	
+    return 0;
 }

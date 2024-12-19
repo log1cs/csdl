@@ -3,31 +3,25 @@
 using namespace std;
 
 template <typename T>
-class BinarySearchTree
-{
+class BinarySearchTree {
     public:
-        BinarySearchTree()
-        {
+        BinarySearchTree() {
             root = NULL;
         }
 
-        ~BinarySearchTree() 
-        {
-            BinarySearchTree_mEmpty();
+        ~BinarySearchTree()  {
+            makeEmpty();
         }
 
-        bool empty()
-        {
+        bool empty() {
             return (root == NULL);
         }
 
-        void BinarySearchTree_mEmpty()
-        {
-            BinarySearchTree_mEmpty(root);
+        void makeEmpty() {
+            makeEmpty(root);
         }
 
-        void insert(T e)
-        {
+        void insert(T e) {
             insert(x, root);
         }
 
@@ -43,8 +37,7 @@ class BinarySearchTree
             }
         }
 
-        void mEmpty(BinaryNode * & t)
-        {
+        void makeEmpty(BinaryNode * & t) {
             if (t == NULL)
             {
                 return;
@@ -60,15 +53,14 @@ class BinarySearchTree
 
         void insert(T e, BinaryNode * & t)
         {
-            if (t == NULL)
-            {
+            if (t == NULL) {
                 t = new BinaryNode(x, NULL, NULL);
             } else if (x < t->elem) {
                 insert(x, t->left);
             } else if (x > t->elem) {
                 insert(x, t->right);
             } else {
-                ;
+                // Do nothing
             }
         }
 
@@ -89,10 +81,7 @@ class BinarySearchTree
 
 
 int main() {
-
-
-
-
+    BinarySearchTree<char> bst;
 
 
 }
